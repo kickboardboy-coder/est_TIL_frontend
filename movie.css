@@ -1,0 +1,442 @@
+
+/* 0. 리셋 + 공통 + 색 등 */
+
+
+* {margin: 0; padding: 0; box-sizing: border-box;}
+
+:root {
+    --bg: #0f0f14;  /* 전체 배경 */
+    --surface: #1a1a24;  /* 카드 배경 */
+    --surface-2: #24242f;  /* 표면 */
+    --text: #f5f5f7;
+    --muted: #9a9aa8;
+    --accent: #e50914;  /* 포인트 */
+    --gold: #f5c518;  /* 평점 */
+    --line: #2e2e3a;
+}
+
+body {
+    font-family: 'pretendard', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    /* 헤더 높이 만큼 떨어뜨려놓기 */
+    padding-top: 60px;
+
+}
+img { width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+
+
+
+
+/* 1. 헤더 */
+
+
+.site-header {
+    /* fixed 를 이용할 예정이고, 왼쪽에 logo, nav, 오른쪽 끝에 재생버튼 */
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    z-index: 1000;
+    justify-content: space-between;
+    background-color: rgba(15, 15, 20, 0.8);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+}
+.nav-container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.logo {
+    color: var(--accent);
+    font-weight: 900;
+    font-size: 1.5rem;
+}
+
+.site-nav {
+    display: flex;
+    gap: 15px;
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+.site-nav a {
+    transition: color 0.2s;
+}
+.site-nav a:hover {
+    color: var(--text);
+}
+.btn-play-sm {
+    cursor: pointer;
+    background-color: var(--accent);
+    border: none;
+    color: var(--text);
+    padding: 8px 18px;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    transition: opacity 0.2s;
+}
+.btn-play-sm:hover {
+    opacity: 0.85;
+}
+
+/* 2. 배너 */
+
+.banner {
+    position: relative;
+    height: 70vh;
+    min-height: 420px;
+    display: flex;
+    align-items: flex-end;
+    padding: 45px;
+    background: linear-gradient(135deg, rgb(90, 52, 90), rgb(90, 26, 37), grey);
+    overflow: hidden;
+}
+.banner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(to top, rgba(15, 15, 20, 0.9), rgba(15, 15, 20, 0.2) transparent);
+}
+.banner-content {
+    position: relative;
+    z-index: 1;
+}
+.banner-badge {
+    display: inline-block;
+    background: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+
+}
+
+.banner-title {
+    font-size: 3rem;
+    text-transform: uppercase;
+    font-weight: 900;
+
+}
+
+.banner-meta {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+    color: var(--muted);
+}
+
+.banner-rating {
+    color: var(--gold);
+    font-weight: 700;
+
+}
+
+.banner-btn-container {
+    display: flex;
+    gap: 13px;
+    flex-wrap: wrap;
+
+}
+
+.btn {
+    padding: 10px 30px;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+
+
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+.btn-play {
+    background: white;
+    color: black;
+}
+
+.btn-add {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+/* section 클래스와 section-title 클래스 공통 부분 */
+
+.section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 45px 32px;
+    /* nav 의 링크로 이동시 헤더에 가려지지 않도록 하기위해 위에 margin을 넣어줘야 한다. 단, 스크롤 했을때 */
+    scroll-margin-top: 75px;
+}
+
+.section-title {
+    font-weight: 800;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    padding-left: 12px;
+    border-left: 4px solid var(--accent);
+}
+
+/* 3. 작품 정보 */
+
+.info-container {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.info-poster {
+    width: 200px;
+    height: 290px;
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgb(90, 52, 90), rgb(90, 26, 37), grey );
+}
+
+.info-body {
+    flex: 1;
+    min-width: 280px;
+}
+.info-genres {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.genre-tag {
+    background: var(--surface-2);
+    color: var(--muted);
+    font-size: 0.8rem;
+    padding: 5px 15px;
+    border-radius: 9999px;
+}
+
+.info-synopsis {
+    color: #ddd;
+    margin-bottom: 20px;
+}
+
+.info-credits {
+    font-size: 0.9rem;
+}
+
+.info-credits dt {
+    display: inline-block;
+    width: 70px;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.info-credits span {    
+    color: var(--muted);
+    text-transform: capitalize;
+}
+
+.credit-line {
+    margin-bottom: 8px;
+}
+
+/* 4.출연진 */
+
+.cast-flex {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+}
+
+.cast-card {
+    cursor: pointer;
+    text-align: center;
+}
+
+.cast-photo {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--surface-2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cast-card:hover .cast-photo {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(229, 9, 20, 0.3);
+}
+
+.cast-name {
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.cast-card:last-of-type .cast-name {
+    text-transform: uppercase;
+}
+.cast-role {
+    font-size: 0.78rem;
+    color: var(--muted);
+}
+
+/* 5. 에피소드 */
+
+.episode-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.episode {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 15px 20px;
+    transition: background 0.2s;
+}
+.episode:hover {
+    background: var(--surface-2);
+}
+.episode-num {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--muted);
+    width: 30px;
+    flex-shrink: 0;
+    text-align: center;
+}
+.episode-thumb {
+    width: 120px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, #2e2e50, #44aaaa);
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.episode-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.episode-name {
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+.episode-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    /* 말줄임표 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.episode-time {
+    font-size: 0.82rem;
+    color: var(--muted);
+    flex-shrink: 0;
+}
+
+
+/* 6. 비슷한 작품 */
+
+.similar-flex {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+
+}
+
+.similar-card {
+    cursor: pointer;
+    background: var(--surface);
+    border-radius: 10px;
+    transition: transform 0.2s;
+
+}
+
+.similar-card:hover {
+    transform: translateY(-5px);
+}
+
+.similar-poster {
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    background: linear-gradient(135deg, #000030, #054590);
+}
+
+.similar-title {
+    padding: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 30px;
+    color: var(--muted);
+    font-size: 0.85rem;
+     text-align: center;
+}
+
+@media (max-width:768px) {
+    .banner {
+        padding: 30px 20px;
+    }
+    .banner-title {
+        font-size: 2rem;
+    }
+    .site-nav {
+        display: none;
+    }
+    .section {
+        padding: 30px 20px;
+    }
+    .info-poster {
+        width: 140px;
+        height: 200px;
+        font-size: 2.5rem;
+    }
+    .episode-thumb {
+        width: 80px;
+        height: 50px;
+    }
+    .episode-desc {
+        display: none;
+    }
+}
